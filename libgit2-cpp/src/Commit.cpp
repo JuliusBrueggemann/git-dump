@@ -1,6 +1,5 @@
 #include "libgit2-cpp/Commit.h"
 
-#include <algorithm>
 #include <array>
 
 using namespace git;
@@ -9,7 +8,8 @@ auto Commit::from_oid(git_repository* repo, const git_oid& id) -> tl::expected<C
 {
     git_commit* commit = nullptr;
     int error = git_commit_lookup(&commit, repo, &id);
-    if (error < 0) {
+    if (error < 0)
+    {
         return tl::make_unexpected(Error::last_error());
     }
 

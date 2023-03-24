@@ -3,5 +3,8 @@ PointerAlignment: Left
 NamespaceIndentation: All
 AlwaysBreakTemplateDeclarations: Yes
 AccessModifierOffset: -4
-ColumnLimit: 100
+ColumnLimit: 120
 SpaceAfterCStyleCast: true
+PackConstructorInitializers: Never
+BreakConstructorInitializers: AfterColon
+Cpp11BracedListStyle: false

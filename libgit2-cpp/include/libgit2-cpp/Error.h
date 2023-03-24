@@ -19,4 +19,4 @@ namespace git
 
         Error(const char* msg, int error_class) noexcept;
     };
-}
+} // namespace git

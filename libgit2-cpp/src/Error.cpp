@@ -21,7 +21,6 @@ auto Error::what() const noexcept -> std::string_view
     return m_msg;
 }
 
-
 auto Error::error_class() const noexcept -> int
 {
     return m_error_class;

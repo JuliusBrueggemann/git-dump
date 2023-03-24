@@ -9,7 +9,8 @@ auto Repository::open(const char* path) noexcept -> tl::expected<Repository, Err
     assert(path != nullptr);
     git_repository* repo = nullptr;
     int error = git_repository_open(&repo, path);
-    if (error < 0) {
+    if (error < 0)
+    {
         return tl::make_unexpected(Error::last_error());
     }
 
@@ -20,7 +21,8 @@ auto Repository::head() const noexcept -> tl::expected<Commit, Error>
 {
     git_oid oid{};
     int error = git_reference_name_to_id(&oid, m_repo, "HEAD");
-    if (error < 0) {
+    if (error < 0)
+    {
         return tl::make_unexpected(Error::last_error());
     }
 
