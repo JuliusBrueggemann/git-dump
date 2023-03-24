@@ -1,0 +1,15 @@
+{
+  "$schema": "https://raw.githubusercontent.com/microsoft/vcpkg/master/scripts/vcpkg.schema.json",
+  "name": "my-application",
+  "version": "0.0.1",
+  "dependencies": [
+    "fmt",
+    "tl-expected",
+    "tl-optional",
+    {
+      "name": "libgit2",
+      "default-features": false,
+      "features": ["pcre2"]
+    }
+  ]
+}
