@@ -9,6 +9,11 @@ Once the environment variable is set, you can simply open the project in an IDE 
 Alternatively, you can build `git-dump` from the command line:
 
 ```
-cmake -S . -B build --preset=<preset>
+cmake -S . -B build --preset=x64-release-static --install-prefix=<your preferred installation path>
 cmake --build build
+cmake --install build
 ```
+
+This will install `git-dump` to `<your preferred installation path>/bin`. For example, if you specify `C:\Program Files\git-dump\` as installation path, 
+`git-dump` will be installed to `C:\Program Files\git-dump\bin`. You will need to manually add the installation path to the `PATH` environment variable if you 
+want to be able to use `git-dump` from anywhere on the system.
