@@ -23,3 +23,8 @@ auto Commit::hash() const noexcept -> std::string
     char* result = git_oid_tostr(buffer.data(), buffer.size(), id);
     return result;
 }
+
+auto Commit::summary() const noexcept -> std::string
+{
+    return git_commit_summary(m_commit);
+}

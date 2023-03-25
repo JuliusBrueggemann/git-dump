@@ -14,12 +14,14 @@ OPTIONS:
     -o File                     Specifies the name of the output file. By default, output is printed to stdout.
     -h --hash                   Output the hash of the HEAD.
     -d --dirty                  Output whether the repository has uncommitted changes.
+    -s --summary                Output the summary of the current commit. The summary is the first paragraph of the commit message.
 )";
 
 const char* repository = nullptr;
 FILE* output = stdout;
 bool output_hash = false;
 bool output_dirty = false;
+bool output_summary = false;
 
 void parse_cmd_line(int argc, char** argv);
 
@@ -60,6 +62,18 @@ int main(int argc, char** argv)
         fmt::print(output, "static constexpr bool GIT_IS_DIRTY = {};\n", dirty);
     }
 
+    if (output_summary)
+    {
+        auto summary = repo.head()
+                           .map([](const Commit& c) { return c.summary(); })
+                           .or_else([](const Error& e) {
+                               fmt::print(stderr, "Failed to get commit summary: {}\n", e.what());
+                               std::exit(e.error_class());
+                           })
+                           .value();
+        fmt::print(output, "static constexpr char GIT_HEAD_SUMMARY[] = \"{}\";\n", summary);
+    }
+
     if (output != stdout)
         fclose(output);
 
@@ -89,6 +103,10 @@ void parse_cmd_line(int argc, char** argv)
         else if (arg == "-d" || arg == "--dirty")
         {
             output_dirty = true;
+        }
+        else if (arg == "-s" || arg == "--summary")
+        {
+            output_summary = true;
         }
         else
         {

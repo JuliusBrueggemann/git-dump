@@ -18,6 +18,7 @@ namespace git
         static auto from_oid(git_repository* repo, const git_oid& id) -> tl::expected<Commit, Error>;
 
         auto hash() const noexcept -> std::string;
+        auto summary() const noexcept -> std::string;
 
     private:
         git_commit* m_commit;
